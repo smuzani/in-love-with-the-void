@@ -3,22 +3,27 @@ import '../repositories/queen_repository.dart';
 import '../repositories/location_repository.dart';
 import '../models/goth_queen.dart';
 import '../models/location.dart';
+import '../services/claude_service.dart';
 
 /// ViewModel for the main game screen (VN interface)
 class GameViewModel extends BaseViewModel {
   final QueenRepository _queenRepository;
   final LocationRepository _locationRepository;
+  final ClaudeService _claudeService;
 
   GothQueen? _currentQueen;
   Location? _currentLocation;
   final List<String> _storyText = [];
   String _playerInput = '';
+  final List<Map<String, String>> _conversationHistory = [];
 
   GameViewModel({
     QueenRepository? queenRepository,
     LocationRepository? locationRepository,
+    ClaudeService? claudeService,
   })  : _queenRepository = queenRepository ?? MockQueenRepository(),
-        _locationRepository = locationRepository ?? MockLocationRepository();
+        _locationRepository = locationRepository ?? MockLocationRepository(),
+        _claudeService = claudeService ?? ClaudeService();
 
   GothQueen? get currentQueen => _currentQueen;
   Location? get currentLocation => _currentLocation;
@@ -68,35 +73,93 @@ class GameViewModel extends BaseViewModel {
     _playerInput = '';
 
     await runBusyFuture(() async {
-      // TODO: Implement actual game logic
-      // For now, just echo responses based on simple keywords
+      try {
+        // Build system prompt with game context
+        final systemPrompt = _buildSystemPrompt();
 
-      if (input.toLowerCase().contains('talk') ||
-          input.toLowerCase().contains('speak')) {
-        if (_currentQueen != null) {
-          _addStoryText(
-              '${_currentQueen!.name} regards you with ${_currentQueen!.stats.mood > 0.5 ? "mild interest" : "cold indifference"}.');
-          if (_currentQueen!.isPoet) {
-            _addStoryText(
-                '"The void whispers secrets to those who dare to listen..."');
-          }
+        // Call Claude API
+        final response = await _claudeService.sendMessage(
+          userMessage: input,
+          systemPrompt: systemPrompt,
+          conversationHistory: _conversationHistory,
+        );
+
+        // Add to conversation history
+        _conversationHistory.add({'role': 'user', 'content': input});
+        _conversationHistory.add({'role': 'assistant', 'content': response});
+
+        // Keep conversation history manageable (last 10 exchanges)
+        if (_conversationHistory.length > 20) {
+          _conversationHistory.removeRange(0, _conversationHistory.length - 20);
         }
-      } else if (input.toLowerCase().contains('look') ||
-          input.toLowerCase().contains('examine')) {
-        if (_currentLocation != null) {
-          _addStoryText(_currentLocation!.atmosphere);
-        }
-      } else if (input.toLowerCase().contains('stats') ||
-          input.toLowerCase().contains('status')) {
-        if (_currentQueen != null) {
-          _addStoryText(
-              'Mood: ${(_currentQueen!.stats.mood * 100).toStringAsFixed(0)}%, '
-              'Friendship: ${(_currentQueen!.stats.friendship * 100).toStringAsFixed(0)}%');
-        }
-      } else {
-        _addStoryText('Nothing happens. The silence is deafening.');
+
+        // Display response
+        _addStoryText(response);
+      } catch (e) {
+        _addStoryText(
+          'The void remains silent. (Error: ${e.toString()})',
+        );
       }
     });
+  }
+
+  /// Build system prompt with current game state context
+  String _buildSystemPrompt() {
+    final buffer = StringBuffer();
+
+    buffer.writeln(
+      'You are the narrator for "In Love With The Void", a goth dating simulator visual novel.',
+    );
+    buffer.writeln(
+      'Style: Dark, poetic, atmospheric. Think Bauhaus meets visual novels.',
+    );
+    buffer.writeln();
+
+    // Current location
+    if (_currentLocation != null) {
+      buffer.writeln('CURRENT LOCATION: ${_currentLocation!.name}');
+      buffer.writeln(_currentLocation!.description);
+      buffer.writeln('Atmosphere: ${_currentLocation!.atmosphere}');
+      buffer.writeln();
+    }
+
+    // Current queen
+    if (_currentQueen != null) {
+      buffer.writeln('CURRENT CHARACTER: ${_currentQueen!.name}');
+      buffer.writeln(_currentQueen!.description);
+      buffer.writeln();
+      buffer.writeln('CHARACTER STATS:');
+      buffer.writeln(
+        'Mood: ${(_currentQueen!.stats.mood * 100).toStringAsFixed(0)}%',
+      );
+      buffer.writeln(
+        'Friendship: ${(_currentQueen!.stats.friendship * 100).toStringAsFixed(0)}%',
+      );
+
+      if (_currentQueen!.isPoet) buffer.writeln('Trait: Poet (speaks in tongues)');
+      if (_currentQueen!.isNihilist) buffer.writeln('Trait: Nihilist (mood always nil)');
+      if (_currentQueen!.isSiren) buffer.writeln('Trait: Siren (has many followers)');
+      buffer.writeln();
+    }
+
+    buffer.writeln('INSTRUCTIONS:');
+    buffer.writeln(
+      '- Respond to player actions in 2-4 sentences maximum',
+    );
+    buffer.writeln(
+      '- Be evocative but concise',
+    );
+    buffer.writeln(
+      '- Match the dark, romantic, goth aesthetic',
+    );
+    buffer.writeln(
+      '- Queens are not easy - they are mysterious, aloof, powerful',
+    );
+    buffer.writeln(
+      '- Describe what happens, what characters say/do in response',
+    );
+
+    return buffer.toString();
   }
 
   /// Navigate to a different location

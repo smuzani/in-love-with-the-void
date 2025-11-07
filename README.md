@@ -43,8 +43,3 @@
 ### Important: API Keys
 
 This project uses Claude Haiku 4.5 for narrative generation. Never commit your `.env` file. The `.env.example` file shows the required format.
-
-## CODE
-
-database/: In Supabase as of writing. Mostly for LLM stuff
-app/: Apps and web are done with Flutter.

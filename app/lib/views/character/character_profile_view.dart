@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../theme/app_theme.dart';
 import '../../viewmodels/character_viewmodel.dart';
 import '../../widgets/stat_display.dart';
 
@@ -27,21 +28,18 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.purple.shade200,
-        title: const Text(
-          'PROFILE',
-          style: TextStyle(letterSpacing: 2),
-        ),
+        title: const Text('PROFILE'),
       ),
       body: Consumer<CharacterViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isBusy) {
             return const Center(
-              child: CircularProgressIndicator(color: Colors.purple),
+              child: CircularProgressIndicator(),
             );
           }
 
@@ -49,9 +47,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
             return Center(
               child: Text(
                 'Queen not found',
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 16,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: AppTheme.ash,
                 ),
               ),
             );
@@ -65,8 +62,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black,
-                  Colors.purple.shade900.withOpacity(0.2),
+                  AppTheme.jetBlack,
+                  AppTheme.driedCrimson.withValues(alpha: 0.15),
                 ],
               ),
             ),
@@ -79,10 +76,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                   Center(
                     child: Text(
                       queen.name,
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.purple.shade200,
+                      style: theme.textTheme.displayMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
                         letterSpacing: 2,
                       ),
                     ),
@@ -94,9 +89,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                     child: Text(
                       viewModel.traitsText,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade500,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: AppTheme.iron,
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -156,9 +150,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                   Center(
                     child: Text(
                       'Dominant Skill: ${viewModel.dominantSkill}',
-                      style: TextStyle(
-                        color: Colors.purple.shade300,
-                        fontSize: 12,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: colorScheme.primary,
                         fontStyle: FontStyle.italic,
                       ),
                     ),
@@ -189,6 +182,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
   }
 
   Widget _buildSection(String title, String content) {
+    final theme = Theme.of(context);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -196,9 +191,8 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
         const SizedBox(height: 8),
         Text(
           content,
-          style: TextStyle(
-            color: Colors.grey.shade300,
-            fontSize: 14,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: AppTheme.boneWhite,
             height: 1.5,
           ),
         ),
@@ -207,13 +201,13 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
   }
 
   Widget _buildSectionTitle(String title) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Text(
       title.toUpperCase(),
-      style: TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-        color: Colors.purple.shade400,
-        letterSpacing: 2,
+      style: theme.textTheme.labelMedium?.copyWith(
+        color: colorScheme.primary,
       ),
     );
   }

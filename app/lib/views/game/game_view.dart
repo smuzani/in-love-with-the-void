@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../theme/app_theme.dart';
 import '../../viewmodels/game_viewmodel.dart';
 import '../character/character_profile_view.dart';
 
@@ -42,16 +43,15 @@ class _GameViewState extends State<GameView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.purple.shade200,
         title: Consumer<GameViewModel>(
           builder: (context, viewModel, child) {
             return Text(
               viewModel.currentLocation?.name ?? 'Unknown Location',
-              style: const TextStyle(letterSpacing: 2),
             );
           },
         ),
@@ -88,8 +88,8 @@ class _GameViewState extends State<GameView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black,
-                  Colors.purple.shade900.withOpacity(0.2),
+                  AppTheme.jetBlack,
+                  AppTheme.driedCrimson.withValues(alpha: 0.15),
                 ],
               ),
             ),
@@ -101,23 +101,20 @@ class _GameViewState extends State<GameView> {
                     margin: const EdgeInsets.all(16),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.7),
+                      color: AppTheme.jetBlack.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: Colors.purple.shade900.withOpacity(0.5),
+                        color: AppTheme.graphite,
                       ),
                     ),
                     child: viewModel.storyText.isEmpty
                         ? Center(
                             child: viewModel.isBusy
-                                ? const CircularProgressIndicator(
-                                    color: Colors.purple,
-                                  )
+                                ? const CircularProgressIndicator()
                                 : Text(
                                     'The void awaits...',
-                                    style: TextStyle(
-                                      color: Colors.grey.shade600,
-                                      fontSize: 16,
+                                    style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: AppTheme.iron,
                                       fontStyle: FontStyle.italic,
                                     ),
                                   ),
@@ -133,15 +130,14 @@ class _GameViewState extends State<GameView> {
                                 padding: const EdgeInsets.only(bottom: 16),
                                 child: Text(
                                   text,
-                                  style: TextStyle(
+                                  style: theme.textTheme.bodyLarge?.copyWith(
                                     color: isPlayerInput
-                                        ? Colors.purple.shade300
-                                        : Colors.grey.shade300,
-                                    fontSize: 15,
+                                        ? colorScheme.primary
+                                        : AppTheme.boneWhite,
                                     height: 1.6,
                                     fontWeight: isPlayerInput
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
+                                        ? FontWeight.w600
+                                        : FontWeight.w400,
                                   ),
                                 ),
                               );
@@ -154,10 +150,10 @@ class _GameViewState extends State<GameView> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade900,
+                    color: AppTheme.charcoal,
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.purple.shade900.withOpacity(0.3),
+                        color: AppTheme.jetBlack.withValues(alpha: 0.5),
                         blurRadius: 10,
                         offset: const Offset(0, -2),
                       ),
@@ -169,33 +165,12 @@ class _GameViewState extends State<GameView> {
                         Expanded(
                           child: TextField(
                             controller: _inputController,
-                            style: TextStyle(color: Colors.grey.shade200),
+                            style: theme.textTheme.bodyMedium,
                             decoration: InputDecoration(
                               hintText: 'What do you do?',
                               hintStyle: TextStyle(
-                                color: Colors.grey.shade600,
+                                color: AppTheme.iron,
                                 fontStyle: FontStyle.italic,
-                              ),
-                              filled: true,
-                              fillColor: Colors.black,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  color: Colors.purple.shade900,
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  color: Colors.purple.shade900,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                  color: Colors.purple.shade400,
-                                  width: 2,
-                                ),
                               ),
                             ),
                             onSubmitted: (_) => _submitInput(viewModel),
@@ -210,8 +185,8 @@ class _GameViewState extends State<GameView> {
                           icon: Icon(
                             Icons.send,
                             color: viewModel.isBusy
-                                ? Colors.grey.shade700
-                                : Colors.purple.shade300,
+                                ? AppTheme.iron
+                                : colorScheme.primary,
                           ),
                         ),
                       ],

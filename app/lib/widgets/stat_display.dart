@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_theme.dart';
 
 /// Reusable widget for displaying a stat with a progress bar
 class StatDisplay extends StatelessWidget {
@@ -15,7 +16,9 @@ class StatDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final displayColor = color ?? Colors.purple.shade300;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final displayColor = color ?? colorScheme.primary;
     final percentage = (value * 100).toStringAsFixed(0);
 
     return Padding(
@@ -28,17 +31,15 @@ class StatDisplay extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 13,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: AppTheme.ash,
                 ),
               ),
               Text(
                 '$percentage%',
-                style: TextStyle(
+                style: theme.textTheme.bodySmall?.copyWith(
                   color: displayColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
@@ -48,7 +49,7 @@ class StatDisplay extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
-              backgroundColor: Colors.grey.shade800,
+              backgroundColor: AppTheme.charcoal,
               valueColor: AlwaysStoppedAnimation<Color>(displayColor),
               minHeight: 8,
             ),

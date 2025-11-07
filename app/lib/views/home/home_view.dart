@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../theme/app_theme.dart';
 import '../../viewmodels/home_viewmodel.dart';
 import '../game/game_view.dart';
 
@@ -22,15 +23,15 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.black,
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isBusy) {
             return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.purple,
-              ),
+              child: CircularProgressIndicator(),
             );
           }
 
@@ -40,8 +41,8 @@ class _HomeViewState extends State<HomeView> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.black,
-                  Colors.purple.shade900.withOpacity(0.3),
+                  AppTheme.jetBlack,
+                  AppTheme.driedCrimson.withValues(alpha: 0.2),
                 ],
               ),
             ),
@@ -53,10 +54,9 @@ class _HomeViewState extends State<HomeView> {
                   Text(
                     'IN LOVE WITH\nTHE VOID',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: theme.textTheme.displayLarge?.copyWith(
                       fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.purple.shade200,
+                      fontWeight: FontWeight.w700,
                       letterSpacing: 4,
                       height: 1.2,
                     ),
@@ -64,10 +64,8 @@ class _HomeViewState extends State<HomeView> {
                   const SizedBox(height: 16),
                   Text(
                     'A Goth Dating Simulator',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade400,
-                      letterSpacing: 2,
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: AppTheme.ash,
                     ),
                   ),
                   const SizedBox(height: 80),
@@ -84,8 +82,6 @@ class _HomeViewState extends State<HomeView> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple.shade900,
-                        foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(
                           horizontal: 48,
                           vertical: 20,
@@ -97,7 +93,6 @@ class _HomeViewState extends State<HomeView> {
                         style: TextStyle(
                           fontSize: 18,
                           letterSpacing: 2,
-                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
@@ -108,10 +103,8 @@ class _HomeViewState extends State<HomeView> {
                     const SizedBox(height: 40),
                     Text(
                       'NOCTURNE SQUARE',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey.shade600,
-                        letterSpacing: 2,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: AppTheme.iron,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -126,10 +119,10 @@ class _HomeViewState extends State<HomeView> {
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: Colors.grey.shade900.withOpacity(0.5),
+                                color: AppTheme.coalBlack,
                                 borderRadius: BorderRadius.circular(8),
                                 border: Border.all(
-                                  color: Colors.purple.shade900.withOpacity(0.3),
+                                  color: AppTheme.graphite,
                                 ),
                               ),
                               child: Column(
@@ -137,18 +130,15 @@ class _HomeViewState extends State<HomeView> {
                                 children: [
                                   Text(
                                     location.name,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.purple.shade200,
-                                      fontWeight: FontWeight.bold,
+                                    style: theme.textTheme.headlineSmall?.copyWith(
+                                      color: colorScheme.primary,
                                     ),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     location.description,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey.shade400,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: AppTheme.ash,
                                     ),
                                   ),
                                 ],

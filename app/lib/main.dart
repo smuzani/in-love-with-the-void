@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'theme/app_theme.dart';
 import 'viewmodels/home_viewmodel.dart';
 import 'viewmodels/game_viewmodel.dart';
 import 'viewmodels/character_viewmodel.dart';
@@ -23,11 +24,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'In Love With The Void',
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.purple,
-          scaffoldBackgroundColor: Colors.black,
-        ),
+        theme: AppTheme.darkTheme,
         home: const HomeView(),
         debugShowCheckedModeBanner: false,
       ),

@@ -21,9 +21,9 @@ class GameViewModel extends BaseViewModel {
     QueenRepository? queenRepository,
     LocationRepository? locationRepository,
     ClaudeService? claudeService,
-  })  : _queenRepository = queenRepository ?? MockQueenRepository(),
-        _locationRepository = locationRepository ?? MockLocationRepository(),
-        _claudeService = claudeService ?? ClaudeService();
+  }) : _queenRepository = queenRepository ?? MockQueenRepository(),
+       _locationRepository = locationRepository ?? MockLocationRepository(),
+       _claudeService = claudeService ?? ClaudeService();
 
   GothQueen? get currentQueen => _currentQueen;
   Location? get currentLocation => _currentLocation;
@@ -45,13 +45,15 @@ class GameViewModel extends BaseViewModel {
       // Add initial story text
       if (_currentLocation != null) {
         _addStoryText(
-            'You find yourself in ${_currentLocation!.name}. ${_currentLocation!.description}');
+          'You find yourself in ${_currentLocation!.name}. ${_currentLocation!.description}',
+        );
         _addStoryText(_currentLocation!.atmosphere);
       }
 
       if (_currentQueen != null) {
         _addStoryText(
-            'You notice ${_currentQueen!.name}. ${_currentQueen!.description}');
+          'You notice ${_currentQueen!.name}. ${_currentQueen!.description}',
+        );
       }
     });
   }
@@ -96,9 +98,7 @@ class GameViewModel extends BaseViewModel {
         // Display response
         _addStoryText(response);
       } catch (e) {
-        _addStoryText(
-          'The void remains silent. (Error: ${e.toString()})',
-        );
+        _addStoryText('The void remains silent. (Error: ${e.toString()})');
       }
     });
   }
@@ -136,22 +136,19 @@ class GameViewModel extends BaseViewModel {
         'Friendship: ${(_currentQueen!.stats.friendship * 100).toStringAsFixed(0)}%',
       );
 
-      if (_currentQueen!.isPoet) buffer.writeln('Trait: Poet (speaks in tongues)');
-      if (_currentQueen!.isNihilist) buffer.writeln('Trait: Nihilist (mood always nil)');
-      if (_currentQueen!.isSiren) buffer.writeln('Trait: Siren (has many followers)');
+      if (_currentQueen!.isPoet)
+        buffer.writeln('Trait: Poet (speaks in tongues)');
+      if (_currentQueen!.isNihilist)
+        buffer.writeln('Trait: Nihilist (mood always nil)');
+      if (_currentQueen!.isSiren)
+        buffer.writeln('Trait: Siren (has many followers)');
       buffer.writeln();
     }
 
     buffer.writeln('INSTRUCTIONS:');
-    buffer.writeln(
-      '- Respond to player actions in 2-4 sentences maximum',
-    );
-    buffer.writeln(
-      '- Be evocative but concise',
-    );
-    buffer.writeln(
-      '- Match the dark, romantic, goth aesthetic',
-    );
+    buffer.writeln('- Respond to player actions in 2-4 sentences maximum');
+    buffer.writeln('- Be evocative but concise');
+    buffer.writeln('- Match the dark, romantic, goth aesthetic');
     buffer.writeln(
       '- Queens are not easy - they are mysterious, aloof, powerful',
     );
@@ -172,8 +169,7 @@ class GameViewModel extends BaseViewModel {
         _addStoryText(location.atmosphere);
 
         // Check for queens at this location
-        final queens =
-            await _queenRepository.getQueensAtLocation(locationId);
+        final queens = await _queenRepository.getQueensAtLocation(locationId);
         if (queens.isNotEmpty) {
           _currentQueen = queens.first;
           _addStoryText('You see ${_currentQueen!.name} here.');

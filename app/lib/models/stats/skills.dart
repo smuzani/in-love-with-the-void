@@ -77,8 +77,15 @@ class Skills {
 
   /// Get the highest skill value
   double get highestSkill {
-    return [gravitas, aestheticism, alchemy, charisma, occult, combat, tech]
-        .reduce((a, b) => a > b ? a : b);
+    return [
+      gravitas,
+      aestheticism,
+      alchemy,
+      charisma,
+      occult,
+      combat,
+      tech,
+    ].reduce((a, b) => a > b ? a : b);
   }
 
   /// Get the name of the highest skill
@@ -93,8 +100,6 @@ class Skills {
       'tech': tech,
     };
 
-    return skills.entries
-        .reduce((a, b) => a.value > b.value ? a : b)
-        .key;
+    return skills.entries.reduce((a, b) => a.value > b.value ? a : b).key;
   }
 }

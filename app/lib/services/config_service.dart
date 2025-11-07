@@ -40,9 +40,9 @@ class ConfigService {
   /// Check if configuration is valid
   static bool get isConfigured {
     return supabaseUrl.isNotEmpty &&
-           !supabaseUrl.contains('YOUR_') &&
-           supabaseAnonKey.isNotEmpty &&
-           !supabaseAnonKey.contains('YOUR_');
+        !supabaseUrl.contains('YOUR_') &&
+        supabaseAnonKey.isNotEmpty &&
+        !supabaseAnonKey.contains('YOUR_');
   }
 }
 

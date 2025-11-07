@@ -138,9 +138,11 @@ class GothQueen {
     return const GothQueen(
       id: 'sample_1',
       name: 'Raven Nightshade',
-      description: 'A mysterious figure draped in black lace and shadows. '
+      description:
+          'A mysterious figure draped in black lace and shadows. '
           'Her presence commands both fear and admiration.',
-      appearance: 'Tall and elegant, with long black hair cascading over '
+      appearance:
+          'Tall and elegant, with long black hair cascading over '
           'a Victorian-style dress adorned with silver chains. Dark eyeliner '
           'accentuates piercing eyes that seem to look through you.',
       needs: Needs(
@@ -154,11 +156,7 @@ class GothQueen {
         alcohol: 0.4,
         nicotine: 0.5,
       ),
-      stats: CharacterStats(
-        mood: 0.6,
-        sanity: 0.5,
-        friendship: 0.0,
-      ),
+      stats: CharacterStats(mood: 0.6, sanity: 0.5, friendship: 0.0),
       skills: Skills(
         gravitas: 0.9,
         aestheticism: 0.8,
@@ -168,11 +166,7 @@ class GothQueen {
         combat: 0.4,
         tech: 0.5,
       ),
-      traits: [
-        Trait.poet,
-        Trait.voidTouched,
-        Trait.nocturnal,
-      ],
+      traits: [Trait.poet, Trait.voidTouched, Trait.nocturnal],
       currentLocation: 'The Obsidian Cafe',
     );
   }

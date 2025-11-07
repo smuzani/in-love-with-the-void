@@ -8,10 +8,7 @@ import '../../widgets/stat_display.dart';
 class CharacterProfileView extends StatefulWidget {
   final String queenId;
 
-  const CharacterProfileView({
-    super.key,
-    required this.queenId,
-  });
+  const CharacterProfileView({super.key, required this.queenId});
 
   @override
   State<CharacterProfileView> createState() => _CharacterProfileViewState();
@@ -32,24 +29,18 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PROFILE'),
-      ),
+      appBar: AppBar(title: const Text('PROFILE')),
       body: Consumer<CharacterViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isBusy) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (viewModel.queen == null) {
             return Center(
               child: Text(
                 'Queen not found',
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: AppTheme.ash,
-                ),
+                style: theme.textTheme.bodyLarge?.copyWith(color: AppTheme.ash),
               ),
             );
           }
@@ -98,17 +89,11 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                   const SizedBox(height: 24),
 
                   // Appearance
-                  _buildSection(
-                    'Appearance',
-                    queen.appearance,
-                  ),
+                  _buildSection('Appearance', queen.appearance),
                   const SizedBox(height: 20),
 
                   // Description
-                  _buildSection(
-                    'About',
-                    queen.description,
-                  ),
+                  _buildSection('About', queen.description),
                   const SizedBox(height: 24),
 
                   // Stats
@@ -136,10 +121,11 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                   // Skills
                   _buildSectionTitle('Skills'),
                   const SizedBox(height: 12),
+                  StatDisplay(label: 'Gravitas', value: queen.skills.gravitas),
                   StatDisplay(
-                      label: 'Gravitas', value: queen.skills.gravitas),
-                  StatDisplay(
-                      label: 'Aestheticism', value: queen.skills.aestheticism),
+                    label: 'Aestheticism',
+                    value: queen.skills.aestheticism,
+                  ),
                   StatDisplay(label: 'Alchemy', value: queen.skills.alchemy),
                   StatDisplay(label: 'Charisma', value: queen.skills.charisma),
                   StatDisplay(label: 'Occult', value: queen.skills.occult),
@@ -163,12 +149,16 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
                   const SizedBox(height: 12),
                   StatDisplay(label: 'Alignment', value: queen.needs.alignment),
                   StatDisplay(
-                      label: 'Intellectual', value: queen.needs.intellectual),
+                    label: 'Intellectual',
+                    value: queen.needs.intellectual,
+                  ),
                   StatDisplay(label: 'Solitude', value: queen.needs.solitude),
                   StatDisplay(label: 'Social', value: queen.needs.social),
                   StatDisplay(label: 'Aesthetic', value: queen.needs.aesthetic),
                   StatDisplay(
-                      label: 'Validation', value: queen.needs.validation),
+                    label: 'Validation',
+                    value: queen.needs.validation,
+                  ),
                   StatDisplay(label: 'Caffeine', value: queen.needs.caffeine),
                   StatDisplay(label: 'Alcohol', value: queen.needs.alcohol),
                   StatDisplay(label: 'Nicotine', value: queen.needs.nicotine),
@@ -206,9 +196,7 @@ class _CharacterProfileViewState extends State<CharacterProfileView> {
 
     return Text(
       title.toUpperCase(),
-      style: theme.textTheme.labelMedium?.copyWith(
-        color: colorScheme.primary,
-      ),
+      style: theme.textTheme.labelMedium?.copyWith(color: colorScheme.primary),
     );
   }
 

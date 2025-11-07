@@ -23,9 +23,7 @@ abstract class QueenRepository {
 
 /// Mock implementation of QueenRepository for development
 class MockQueenRepository implements QueenRepository {
-  final List<GothQueen> _queens = [
-    GothQueen.sample(),
-  ];
+  final List<GothQueen> _queens = [GothQueen.sample()];
 
   @override
   Future<List<GothQueen>> getAllQueens() async {

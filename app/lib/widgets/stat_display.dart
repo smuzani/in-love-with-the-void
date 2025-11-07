@@ -31,9 +31,7 @@ class StatDisplay extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: AppTheme.ash,
-                ),
+                style: theme.textTheme.bodySmall?.copyWith(color: AppTheme.ash),
               ),
               Text(
                 '$percentage%',

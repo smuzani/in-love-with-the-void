@@ -10,7 +10,7 @@ class CharacterViewModel extends BaseViewModel {
   GothQueen? _queen;
 
   CharacterViewModel({QueenRepository? queenRepository})
-      : _queenRepository = queenRepository ?? MockQueenRepository();
+    : _queenRepository = queenRepository ?? MockQueenRepository();
 
   GothQueen? get queen => _queen;
 

@@ -35,17 +35,10 @@ class ClaudeService {
     }
 
     // Add current user message
-    messages.add({
-      'role': 'user',
-      'content': userMessage,
-    });
+    messages.add({'role': 'user', 'content': userMessage});
 
     // Build request body
-    final body = {
-      'model': _model,
-      'max_tokens': 1024,
-      'messages': messages,
-    };
+    final body = {'model': _model, 'max_tokens': 1024, 'messages': messages};
 
     // Add system prompt if provided
     if (systemPrompt != null && systemPrompt.isNotEmpty) {

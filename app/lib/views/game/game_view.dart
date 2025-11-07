@@ -50,9 +50,7 @@ class _GameViewState extends State<GameView> {
       appBar: AppBar(
         title: Consumer<GameViewModel>(
           builder: (context, viewModel, child) {
-            return Text(
-              viewModel.currentLocation?.name ?? 'Unknown Location',
-            );
+            return Text(viewModel.currentLocation?.name ?? 'Unknown Location');
           },
         ),
         actions: [
@@ -80,7 +78,9 @@ class _GameViewState extends State<GameView> {
       ),
       body: Consumer<GameViewModel>(
         builder: (context, viewModel, child) {
-          WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+          WidgetsBinding.instance.addPostFrameCallback(
+            (_) => _scrollToBottom(),
+          );
 
           return Container(
             decoration: BoxDecoration(
@@ -103,9 +103,7 @@ class _GameViewState extends State<GameView> {
                     decoration: BoxDecoration(
                       color: AppTheme.jetBlack.withValues(alpha: 0.8),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: AppTheme.graphite,
-                      ),
+                      border: Border.all(color: AppTheme.graphite),
                     ),
                     child: viewModel.storyText.isEmpty
                         ? Center(

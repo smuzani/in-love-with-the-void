@@ -65,7 +65,8 @@ class Location {
         (t) => t.name == json['type'],
         orElse: () => LocationType.other,
       ),
-      queenIds: (json['queenIds'] as List<dynamic>?)
+      queenIds:
+          (json['queenIds'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
           [],
@@ -78,36 +79,44 @@ class Location {
       const Location(
         id: 'obsidian_cafe',
         name: 'The Obsidian Cafe',
-        description: 'A dimly lit cafe where coffee is always black and the '
+        description:
+            'A dimly lit cafe where coffee is always black and the '
             'playlist is always melancholic.',
-        atmosphere: 'Dark wood panels, Edison bulbs casting amber shadows, '
+        atmosphere:
+            'Dark wood panels, Edison bulbs casting amber shadows, '
             'the smell of espresso and old books.',
         type: LocationType.cafe,
       ),
       const Location(
         id: 'void_library',
         name: 'The Void Library',
-        description: 'A secret library hidden at the top of an escalator. '
+        description:
+            'A secret library hidden at the top of an escalator. '
             'Most books are about occult lore and forgotten poetry.',
-        atmosphere: 'Silence broken only by the turning of ancient pages. '
+        atmosphere:
+            'Silence broken only by the turning of ancient pages. '
             'Dust motes dance in shafts of dim light.',
         type: LocationType.library,
       ),
       const Location(
         id: 'goth_grocery',
         name: 'Eternal Halloween',
-        description: 'A large goth grocery where it\'s always Halloween. '
+        description:
+            'A large goth grocery where it\'s always Halloween. '
             'Black roses, skull-shaped candles, and artisanal bitters.',
-        atmosphere: 'Perpetual October evening. Orange and purple lights, '
+        atmosphere:
+            'Perpetual October evening. Orange and purple lights, '
             'the scent of pumpkin spice and incense.',
         type: LocationType.shop,
       ),
       const Location(
         id: 'concrete_courtyard',
         name: 'The Concrete Courtyard',
-        description: 'A large concrete courtyard where people spar with bokken '
+        description:
+            'A large concrete courtyard where people spar with bokken '
             'at sunset and run in silence.',
-        atmosphere: 'Brutalist architecture meets twilight. The sound of '
+        atmosphere:
+            'Brutalist architecture meets twilight. The sound of '
             'wooden swords and measured breathing.',
         type: LocationType.outdoor,
       ),

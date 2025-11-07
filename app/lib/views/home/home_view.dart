@@ -30,9 +30,7 @@ class _HomeViewState extends State<HomeView> {
       body: Consumer<HomeViewModel>(
         builder: (context, viewModel, child) {
           if (viewModel.isBusy) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           return Container(
@@ -90,10 +88,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       child: const Text(
                         'ENTER THE VOID',
-                        style: TextStyle(
-                          fontSize: 18,
-                          letterSpacing: 2,
-                        ),
+                        style: TextStyle(fontSize: 18, letterSpacing: 2),
                       ),
                     ),
                   ),
@@ -121,18 +116,15 @@ class _HomeViewState extends State<HomeView> {
                               decoration: BoxDecoration(
                                 color: AppTheme.coalBlack,
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: AppTheme.graphite,
-                                ),
+                                border: Border.all(color: AppTheme.graphite),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     location.name,
-                                    style: theme.textTheme.headlineSmall?.copyWith(
-                                      color: colorScheme.primary,
-                                    ),
+                                    style: theme.textTheme.headlineSmall
+                                        ?.copyWith(color: colorScheme.primary),
                                   ),
                                   const SizedBox(height: 4),
                                   Text(

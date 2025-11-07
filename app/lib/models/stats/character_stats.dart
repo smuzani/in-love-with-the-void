@@ -34,11 +34,7 @@ class CharacterStats {
     );
   }
 
-  CharacterStats copyWith({
-    double? mood,
-    double? sanity,
-    double? friendship,
-  }) {
+  CharacterStats copyWith({double? mood, double? sanity, double? friendship}) {
     return CharacterStats(
       mood: mood ?? this.mood,
       sanity: sanity ?? this.sanity,
@@ -47,11 +43,7 @@ class CharacterStats {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'mood': mood,
-      'sanity': sanity,
-      'friendship': friendship,
-    };
+    return {'mood': mood, 'sanity': sanity, 'friendship': friendship};
   }
 
   factory CharacterStats.fromJson(Map<String, dynamic> json) {

@@ -5,24 +5,24 @@ import 'package:flutter/material.dart';
 ///////
 class AppTheme {
   // Blacks
-  static const jetBlack    = Color(0xFF0B0B0B);
-  static const coalBlack   = Color(0xFF141414);
-  static const charcoal    = Color(0xFF1E1E1E);
-  static const graphite    = Color(0xFF2A2A2A);
+  static const jetBlack = Color(0xFF0B0B0B);
+  static const coalBlack = Color(0xFF141414);
+  static const charcoal = Color(0xFF1E1E1E);
+  static const graphite = Color(0xFF2A2A2A);
 
-  // Whites 
-  static const boneWhite   = Color(0xFFEDE7E1);
-  static const paperWhite  = Color(0xFFF5F3EF);
-  static const ash         = Color(0xFFC9C4BE);
+  // Whites
+  static const boneWhite = Color(0xFFEDE7E1);
+  static const paperWhite = Color(0xFFF5F3EF);
+  static const ash = Color(0xFFC9C4BE);
 
   // Reds
-  static const bloodRed    = Color(0xFFB30014);
-  static const driedCrimson= Color(0xFF6E000A);
-  static const alarmScarlet= Color(0xFFFF2B2B);
+  static const bloodRed = Color(0xFFB30014);
+  static const driedCrimson = Color(0xFF6E000A);
+  static const alarmScarlet = Color(0xFFFF2B2B);
 
   // Metal
   static const scuffedSilver = Color(0xFF9DA0A3);
-  static const iron          = Color(0xFF707478);
+  static const iron = Color(0xFF707478);
 
   static ThemeData get darkTheme {
     return ThemeData(
@@ -36,12 +36,12 @@ class AppTheme {
         primaryContainer: driedCrimson,
         onPrimaryContainer: paperWhite,
 
-        secondary: scuffedSilver,           // subtle accent (icons, chips)
+        secondary: scuffedSilver, // subtle accent (icons, chips)
         onSecondary: jetBlack,
         secondaryContainer: iron,
         onSecondaryContainer: boneWhite,
 
-        tertiary: boneWhite,                // highlights on dark surfaces
+        tertiary: boneWhite, // highlights on dark surfaces
         onTertiary: jetBlack,
 
         error: alarmScarlet,
@@ -84,21 +84,74 @@ class AppTheme {
       ),
 
       textTheme: const TextTheme(
-        displayLarge:   TextStyle(color: paperWhite, fontSize: 32, fontWeight: FontWeight.w400, letterSpacing: 1.2),
-        displayMedium:  TextStyle(color: paperWhite, fontSize: 28, fontWeight: FontWeight.w400, letterSpacing: 1.1),
-        displaySmall:   TextStyle(color: paperWhite, fontSize: 24, fontWeight: FontWeight.w500, letterSpacing: 1.0),
+        displayLarge: TextStyle(
+          color: paperWhite,
+          fontSize: 32,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 1.2,
+        ),
+        displayMedium: TextStyle(
+          color: paperWhite,
+          fontSize: 28,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 1.1,
+        ),
+        displaySmall: TextStyle(
+          color: paperWhite,
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          letterSpacing: 1.0,
+        ),
 
-        headlineLarge:  TextStyle(color: boneWhite,  fontSize: 22, fontWeight: FontWeight.w500),
-        headlineMedium: TextStyle(color: boneWhite,  fontSize: 20, fontWeight: FontWeight.w500),
-        headlineSmall:  TextStyle(color: boneWhite,  fontSize: 18, fontWeight: FontWeight.w500),
+        headlineLarge: TextStyle(
+          color: boneWhite,
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineMedium: TextStyle(
+          color: boneWhite,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+        headlineSmall: TextStyle(
+          color: boneWhite,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
 
-        bodyLarge:      TextStyle(color: ash,        fontSize: 16, fontWeight: FontWeight.w400, height: 1.35),
-        bodyMedium:     TextStyle(color: ash,        fontSize: 14, fontWeight: FontWeight.w400),
-        bodySmall:      TextStyle(color: scuffedSilver, fontSize: 12, fontWeight: FontWeight.w400),
+        bodyLarge: TextStyle(
+          color: ash,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+          height: 1.35,
+        ),
+        bodyMedium: TextStyle(
+          color: ash,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+        bodySmall: TextStyle(
+          color: scuffedSilver,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+        ),
 
-        labelLarge:     TextStyle(color: scuffedSilver, fontSize: 14, fontWeight: FontWeight.w600, letterSpacing: 1.1),
-        labelMedium:    TextStyle(color: scuffedSilver, fontSize: 12, fontWeight: FontWeight.w600),
-        labelSmall:     TextStyle(color: iron,          fontSize: 10, fontWeight: FontWeight.w500),
+        labelLarge: TextStyle(
+          color: scuffedSilver,
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 1.1,
+        ),
+        labelMedium: TextStyle(
+          color: scuffedSilver,
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+        ),
+        labelSmall: TextStyle(
+          color: iron,
+          fontSize: 10,
+          fontWeight: FontWeight.w500,
+        ),
       ),
 
       inputDecorationTheme: InputDecorationTheme(
@@ -131,7 +184,11 @@ class AppTheme {
           elevation: 2,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1.1),
+          textStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.1,
+          ),
         ),
       ),
 
@@ -149,13 +206,21 @@ class AppTheme {
           side: const BorderSide(color: bloodRed, width: 1),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700, letterSpacing: 1.1),
+          textStyle: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.1,
+          ),
         ),
       ),
 
       iconTheme: const IconThemeData(size: 24, color: scuffedSilver),
 
-      dividerTheme: const DividerThemeData(color: graphite, thickness: 1, space: 1),
+      dividerTheme: const DividerThemeData(
+        color: graphite,
+        thickness: 1,
+        space: 1,
+      ),
 
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: bloodRed,

@@ -9,7 +9,7 @@ class HomeViewModel extends BaseViewModel {
   List<Location> _locations = [];
 
   HomeViewModel({LocationRepository? locationRepository})
-      : _locationRepository = locationRepository ?? MockLocationRepository();
+    : _locationRepository = locationRepository ?? MockLocationRepository();
 
   List<Location> get locations => List.unmodifiable(_locations);
 
@@ -22,8 +22,9 @@ class HomeViewModel extends BaseViewModel {
 
   /// Navigate to a specific location (returns location ID)
   String? navigateToLocation(String locationId) {
-    final location =
-        _locations.where((loc) => loc.id == locationId).firstOrNull;
+    final location = _locations
+        .where((loc) => loc.id == locationId)
+        .firstOrNull;
     if (location != null) {
       return location.id;
     }

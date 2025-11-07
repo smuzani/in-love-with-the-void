@@ -136,12 +136,15 @@ class GameViewModel extends BaseViewModel {
         'Friendship: ${(_currentQueen!.stats.friendship * 100).toStringAsFixed(0)}%',
       );
 
-      if (_currentQueen!.isPoet)
+      if (_currentQueen!.isPoet) {
         buffer.writeln('Trait: Poet (speaks in tongues)');
-      if (_currentQueen!.isNihilist)
+      }
+      if (_currentQueen!.isNihilist) {
         buffer.writeln('Trait: Nihilist (mood always nil)');
-      if (_currentQueen!.isSiren)
+      }
+      if (_currentQueen!.isSiren) {
         buffer.writeln('Trait: Siren (has many followers)');
+      }
       buffer.writeln();
     }
 

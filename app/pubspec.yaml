@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.1.2
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:

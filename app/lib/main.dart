@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'viewmodels/home_viewmodel.dart';
+import 'viewmodels/game_viewmodel.dart';
+import 'viewmodels/character_viewmodel.dart';
+import 'views/home/home_view.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,11 +15,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider(create: (_) => GameViewModel()),
+        ChangeNotifierProvider(create: (_) => CharacterViewModel()),
+      ],
+      child: MaterialApp(
+        title: 'In Love With The Void',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primarySwatch: Colors.purple,
+          scaffoldBackgroundColor: Colors.black,
         ),
+        home: const HomeView(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
